@@ -25,7 +25,7 @@ jobs:
           
       - name: Modificar Arquivo
         run: |
-          ls
+          cd image_base
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
           
       - name: Commit e Push das Modificações para a Branch DevOps
