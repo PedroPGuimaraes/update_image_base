@@ -27,5 +27,6 @@ jobs:
           cd image_base
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
-          git commit -am "Atualizando arquivo via workflow"
-          git push https://${{ secrets.PAT_TOKEN }}@github.com/PedroPGuimaraes/image_base.git DevOps
+          git add .
+          git commit -m "Atualizando arquivo via workflow na branch DevOps"
+          git push origin DevOps
