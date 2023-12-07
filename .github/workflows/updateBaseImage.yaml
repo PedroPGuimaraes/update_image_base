@@ -21,7 +21,8 @@ jobs:
         
       - name: Criar e Mudar para a Branch DevOps
         run: |
-          git checkout DevOps
+          git branches
+          git checkout -b DevOps
           
       - name: Modificar Arquivo
         run: |
