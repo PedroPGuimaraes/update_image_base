@@ -20,7 +20,7 @@ jobs:
         run: |
           git checkout -b DevOps
           cd image_base
-          sed -i 's/"PedroPGuimaraes/image_base.git@v1.0.0"/"PedroPGuimaraes/image_base.git@v1.1.0"/g' Dockerfile
+          sed -i 's#"PedroPGuimaraes/image_base.git@v1.0.0"#"PedroPGuimaraes/image_base.git@v1.1.0"#g' Dockerfile
           
       - name: Commit e Push das Modificações
         run: |
