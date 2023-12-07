@@ -19,6 +19,7 @@ jobs:
       - name: Modificar Arquivo
         run: |
           git checkout -b DevOps
+          ls
           cd image_git
           sed -i 's/"PedroPGuimaraes/image_base.git@v1.0.0"/"PedroPGuimaraes/image_base.git@v1.1.0"/g' Dockerfile
           
