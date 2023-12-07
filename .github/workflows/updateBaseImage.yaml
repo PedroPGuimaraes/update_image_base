@@ -25,9 +25,7 @@ jobs:
       - name: Commit e Push das Modificações
         run: |
           cd image_base
-          echo "git config --global user.email"
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
-          echo "git add ."
           git commit -am "Atualizando arquivo via workflow"
-          git push
+          git push https://${{ secrets.PAT_TOKEN }}@github.com/PedroPGuimaraes/image_base.git DevOps
