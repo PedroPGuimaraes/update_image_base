@@ -1,0 +1,31 @@
+name: Modificar Arquivo em Outro Repositório
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  modify-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Repositório Atual
+        uses: actions/checkout@v2
+        
+      - name: Clone do Repositório Destino
+        run: git clone https://github.com/PedroPGuimaraes/image_base.git
+        
+      - name: Modificar Arquivo
+        run: |
+          git checkout -b DevOps
+          cd image_git
+          sed -i 's/"PedroPGuimaraes/image_base.git@v1.0.0"/"PedroPGuimaraes/image_base.git@v1.1.0"/g' Dockerfile
+          
+      - name: Commit e Push das Modificações
+        run: |
+          cd image_git
+          git config --global user.email "p.guimaraes@4intelligence.ai"
+          git config --global user.name "PedroPGuimaraes"
+          git commit -am "Atualizando arquivo via workflow"
+          git push
