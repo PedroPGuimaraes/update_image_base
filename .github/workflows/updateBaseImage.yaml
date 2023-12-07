@@ -22,10 +22,10 @@ jobs:
       - name: Criar e Mudar para a Branch DevOps
         run: |
           git checkout -b DevOps
-          git branch
           
       - name: Modificar Arquivo
         run: |
+          ls
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
           
       - name: Commit e Push das Modificações para a Branch DevOps
