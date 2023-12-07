@@ -1,9 +1,9 @@
-name: Modificar Arquivo em Outro Repositório
+name: Modificar Arquivo na Branch DevOps
 
 on:
   push:
     branches:
-      - main
+      - main  # ou a branch que deseja monitorar
 
 jobs:
   modify-file:
@@ -16,15 +16,21 @@ jobs:
       - name: Clone do Repositório Destino
         run: git clone https://github.com/PedroPGuimaraes/image_base.git
         
+      - name: Mudar para o Diretório do Repositório Destino
+        run: cd image_base
+        
+      - name: Criar e Mudar para a Branch DevOps
+        run: |
+          git checkout -b DevOps || true
+          git push origin DevOps || true
+          git checkout DevOps
+          
       - name: Modificar Arquivo
         run: |
-          git checkout -b DevOps
-          cd image_base
-          sed -i 's#"PedroPGuimaraes/image_base.git@v1.0.0"#"PedroPGuimaraes/image_base.git@v1.1.0"#g' Dockerfile
+          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
           
-      - name: Commit e Push das Modificações
+      - name: Commit e Push das Modificações para a Branch DevOps
         run: |
-          cd image_base
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
           git add .
