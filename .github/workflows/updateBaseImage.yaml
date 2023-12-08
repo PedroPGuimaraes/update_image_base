@@ -20,12 +20,9 @@ jobs:
         run: |
           cd image_base
           git checkout -b DevOps
-          ls
-          git status
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
-          git status
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
-          git add .
+          git add 'Dockerfile'
           git commit -m "Atualizando arquivo via workflow na branch DevOps"
           git push origin DevOps
