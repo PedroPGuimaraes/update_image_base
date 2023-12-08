@@ -14,13 +14,14 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Clone do Repositório Destino
-        run: git clone git@github.com:PedroPGuimaraes/image_base.git
+        run: git clone https://github.com/PedroPGuimaraes/image_base.git
               
       - name: Criar e Mudar para a Branch DevOps
         run: |
           cd image_base
           git checkout -b DevOps
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
+          git config credential.helper store
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
           git add 'Dockerfile'
