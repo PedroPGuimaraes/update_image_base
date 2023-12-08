@@ -25,4 +25,5 @@ jobs:
           git config --global user.name "PedroPGuimaraes"
           git add 'Dockerfile'
           git commit -m "Atualizando arquivo via workflow na branch DevOps"
-          git push origin DevOps
+          git push https://$PAT_TOKEN@github.com/PedroPGuimaraes/image_base.git DevOps
+
