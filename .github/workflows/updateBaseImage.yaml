@@ -20,7 +20,7 @@ jobs:
         run: |
           cd image_base
           git checkout -b DevOps
-          cd image_base
+          ls
           git status
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
           git status
