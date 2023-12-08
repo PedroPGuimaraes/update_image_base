@@ -30,8 +30,7 @@ jobs:
           
       - name: Commit e Push das Modificações para a Branch DevOps
         run: |
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
-          git add .
+          git config --global user.email "p.guimaraes@4intelligence.ai"
+          git config --global user.name "PedroPGuimaraes"
           git commit -m "Atualizando arquivo via workflow na branch DevOps"
           git push origin DevOps
