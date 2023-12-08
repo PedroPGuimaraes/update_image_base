@@ -25,12 +25,13 @@ jobs:
           
       - name: Modificar Arquivo
         run: |
-          git status
           cd image_base
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
           
       - name: Commit e Push das Modificações para a Branch DevOps
         run: |
+          cd image_base
+          git status
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
           git add .
