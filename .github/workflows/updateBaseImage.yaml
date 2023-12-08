@@ -32,6 +32,7 @@ jobs:
         run: |
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
+          git status
           git add .
           git commit -m "Atualizando arquivo via workflow na branch DevOps"
           git push origin DevOps
