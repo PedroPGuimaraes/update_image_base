@@ -17,7 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          git clone https://github.com/PedroPGuimaraes/image_base.git
+          git clone git@github.com:PedroPGuimaraes/update_image_base.git
 
           cd image_base
           git config user.name "PedroPGuimaraes"
