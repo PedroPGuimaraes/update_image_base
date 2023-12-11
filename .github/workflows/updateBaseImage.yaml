@@ -19,6 +19,7 @@ jobs:
       - name: Modify Dockerfile
         run: |
           git clone https://github.com/PedroPGuimaraes/image_base.git
+          git pull
 
           cd image_base
           git config user.name "PedroPGuimaraes"
