@@ -27,6 +27,7 @@ jobs:
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.1.1"/"PedroPGuimaraes\/image_base.git@v1.0.0"/g' Dockerfile
           git add .
           git commit -m "Update Dockerfile"
+          git pull origin DevOps
           git push origin DevOps
       
 
