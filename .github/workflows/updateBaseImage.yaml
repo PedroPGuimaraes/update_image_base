@@ -1,4 +1,4 @@
-name: Modificar Arquivo na Branch DevOps
+name: Modificar Arquivo DevOps
 
 on:
   push:
