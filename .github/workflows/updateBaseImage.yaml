@@ -25,7 +25,7 @@ jobs:
           git config user.email "p.guimaraes@4intelligence.ai"
           git checkout -b DevOps
           cat Dockerfile
-          sed -i 's/"image_base.git@v1.0.0"/"image_base.git@v1.1.0"/g' Dockerfile
+          sed -i 's/"image_base.git@v1.1.1"/"image_base.git@v1.0.0"/g' Dockerfile
           cat Dockerfile
       
       - name: Commit changes
