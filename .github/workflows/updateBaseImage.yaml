@@ -33,4 +33,8 @@ jobs:
           git push origin DevOps
       
       - name: Open Pull Request using GitHub CLI
-        run: gh pr create --base main --head DevOps --title "Update Dockerfile" --body "Changes in Dockerfile"
+        run: |
+          cd image_base
+          git checkout DevOps
+          git status
+          gh pr create --base main --head DevOps --title "Update Dockerfile" --body "Changes in Dockerfile"
