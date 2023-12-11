@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout do Repositório Atual
         uses: actions/checkout@v2
+
+      - name: Setup credentials to access private repositories
+        run: git config --global url.https://${{ secrets.PAT_TOKEN }}@github.com/.insteadOf https://github.com/
       
       - name: Git Add, Commit and Push
         env:
