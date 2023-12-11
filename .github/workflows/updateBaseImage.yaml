@@ -17,16 +17,12 @@ jobs:
         run: git config --global url.https://${{ secrets.PAT_TOKEN }}@github.com/.insteadOf https://github.com/
       
       - name: Git Add, Commit and Push
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git clone https://github.com/PedroPGuimaraes/image_base.git
 
           cd image_base
-          git config user.name "PedroPGuimaraes"
-          git config user.email "p.guimaraes@4intelligence.ai"
           git checkout -b DevOps
-          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.1.0"/"PedroPGuimaraes\/image_base.git@v1.1.1"/g' Dockerfile
+          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.1.1"/"PedroPGuimaraes\/image_base.git@v1.0.0"/g' Dockerfile
           git add .
           git commit -m "Update Dockerfile"
           git push origin DevOps
