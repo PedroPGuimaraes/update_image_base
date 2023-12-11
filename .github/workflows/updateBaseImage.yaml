@@ -33,3 +33,14 @@ jobs:
           git commit -m "updated Dockerfile"
 
           git remote -v
+
+      - name: Push to another repo
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PAT_TOKEN }} 
+        with:
+          source_file: 'Dockerfile'
+          destination_repo: 'PedroPGuimaraes/image_base'
+          user_email: 'p.guimaraes@4intelligence.ai'
+          user_name: 'PedroPGuimaraes'
+          commit_message: 'updated Dockerfile'
