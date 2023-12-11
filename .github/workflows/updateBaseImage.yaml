@@ -23,16 +23,14 @@ jobs:
           cd image_base
           git config user.name "PedroPGuimaraes"
           git config user.email "p.guimaraes@4intelligence.ai"
-          git checkout -b DevOps
-          cat Dockerfile
+          git branch
+          git checkout DevOps
+          git branch
           sed -i 's/"image_base.git@v1.1.1"/"image_base.git@v1.0.0"/g' Dockerfile
-          cat Dockerfile
       
       - name: Commit changes
         run: |
           cd image_base
-          git checkout -b DevOps
-          ls
           git add .
           git commit -m "Update Dockerfile"
           git push origin DevOps
