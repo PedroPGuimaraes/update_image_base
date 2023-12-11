@@ -3,7 +3,7 @@ name: Modificar Arquivo na Branch DevOps
 on:
   push:
     branches:
-      - main  # ou a branch que deseja monitorar
+      - main
 
 jobs:
   modify-file:
@@ -13,18 +13,23 @@ jobs:
       - name: Checkout do Repositório Atual
         uses: actions/checkout@v2
         
-      - name: Clone do Repositório Destino
-        run: git clone https://github.com/PedroPGuimaraes/image_base.git
-              
-      - name: Criar e Mudar para a Branch DevOps
+      - name: Git Add, Commit and Push
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          cd image_base
-          git checkout -b DevOps
-          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
-          git config credential.helper store
-          git config --global user.email "p.guimaraes@4intelligence.ai"
-          git config --global user.name "PedroPGuimaraes"
-          git add 'Dockerfile'
-          git commit -m "Atualizando arquivo via workflow na branch DevOps"
-          git push 
 
+          git clone https://github.com/PedroPGuimaraes/image_base.git
+
+          cd image_base
+          git config user.name "PedroPGuimaraes"
+          git config user.email "p.guimaraes@4intelligence.ai"
+
+          git checkout -b DevOps
+
+          git status
+          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
+          git status
+          git add Dockerfile
+          git commit -m "updated Dockerfile"
+
+          git remote -v
