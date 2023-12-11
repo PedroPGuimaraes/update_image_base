@@ -21,10 +21,15 @@ jobs:
       - name: Check for changes
         run: |
           git clone https://github.com/PedroPGuimaraes/image_base.git
+          git config --global user.email "p.guimaraes@4intelligence.ai"
+          git config --global user.name "PedroPGuimaraes"
+
           cd image_base
           git checkout DevOps
           git pull origin DevOps
+
           sed -i 's/"PedroPGuimaraes\/image_base.git@v2.0.0"/"PedroPGuimaraes\/image_base.git@v1.0.0"/g' Dockerfile
+
           changes=$(git status --porcelain)
           if [[ -n "$changes" ]]; then
             git add .
@@ -37,7 +42,9 @@ jobs:
       - name: Open Pull Request
         run: |
           cd image_base
+
           pr_count=$(gh pr list --state open --base main --head DevOps --limit 1 | wc -l)
+          
           if [[ "$pr_count" -gt 0 ]]; then
             echo "There is already an open pull request. Exiting..."
             exit 0
