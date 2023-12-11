@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout do Repositório Atual
         uses: actions/checkout@v2
-        
+      
       - name: Git Add, Commit and Push
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -22,14 +22,24 @@ jobs:
           cd image_base
           git config user.name "PedroPGuimaraes"
           git config user.email "p.guimaraes@4intelligence.ai"
-
           git checkout -b DevOps
-
-          git status
           sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
-          git status
-          git add Dockerfile
-          git commit -m "updated Dockerfile"
+          git add .
 
-          git remote -v
-          git push origin DevOps
+      - name: Push repository to another repository
+        uses: ArshfaAdmin/push-to-repo@v1.0.0
+        with:
+          # Source directory from the origin directory
+          source-directory: https://github.com/PedroPGuimaraes/update_image_base.git
+          # Name of the destination username/organization
+          destination-github-username: PedroPGuimaraes
+          # Destination repository
+          destination-repository-name: https://github.com/PedroPGuimaraes/image_base.git
+          # Email for the git commit
+          user-email: p.guimaraes@4intelligence.ai
+          # [Optional] set target branch name for the destination repository. Defaults to "main"
+          target-branch: DevOps
+          # [Optional] commit message for the output repository. ORIGIN_COMMIT is replaced by the URL@commit in the origin repo
+          commit-message: "Update image base"
+
+          
