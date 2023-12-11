@@ -20,6 +20,7 @@ jobs:
       
       - name: Check for changes
         run: |
+          git clone https://github.com/PedroPGuimaraes/image_base.git
           cd image_base
           git checkout DevOps
           git pull origin DevOps
