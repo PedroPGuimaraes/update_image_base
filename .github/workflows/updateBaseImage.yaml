@@ -24,7 +24,11 @@ jobs:
           git config user.name "PedroPGuimaraes"
           git config user.email "p.guimaraes@4intelligence.ai"
           git checkout -b DevOps
-          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.1.1"/"PedroPGuimaraes\/image_base.git@v1.0.0"/g' Dockerfile
+          sed -i 's/"PedroPGuimaraes\/image_base.git@v1.0.0"/"PedroPGuimaraes\/image_base.git@v1.1.0"/g' Dockerfile
           git add .
           git commit -m "Update Dockerfile"
           git push origin DevOps
+
+      - name: Open Pull Request using GitHub CLI
+        run: |
+          gh pr create --base main --head DevOps --title "Update Dockerfile" --body "Changes in Dockerfile"
