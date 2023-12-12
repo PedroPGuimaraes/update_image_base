@@ -35,9 +35,14 @@ jobs:
 
           sed -i 's/\(image_base\.git@v\)[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
 
-          git add .
-          git commit -m "Update Dockerfile"
-          git push origin 'branch-${{ github.ref_name }}'
+          changes=$(git status --porcelain)
+          if [[ -n "$changes" ]]; then
+            git add .
+            git commit -m "Update Dockerfile"
+            git push origin DevOps
+          else
+            echo "No changes to commit."
+          fi
           
       
       - name: Open Pull Request
