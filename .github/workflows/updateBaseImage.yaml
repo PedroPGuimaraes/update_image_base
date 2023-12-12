@@ -47,9 +47,6 @@ jobs:
       
       - name: Open Pull Request
         run: |
-          git branch
-          cd image_base
-
           pr_count=$(gh pr list --state open --base main --head 'branch-${{ github.ref_name }}' --limit 1 | wc -l)
           
           if [[ "$pr_count" -gt 0 ]]; then
