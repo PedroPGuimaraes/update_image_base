@@ -24,13 +24,11 @@ jobs:
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
 
-          branch = 'branch-${{ github.ref_name }}'
-
           cd image_base
-          git checkout -b $branch
+          git checkout -b "branch-${{ github.ref_name }}"
 
           if git ls-remote --exit-code origin "branch-${{ github.ref_name }}"; then
-            git pull origin $branch
+            git pull origin 'branch-${{ github.ref_name }}'
           else
             echo "Branch remoto não encontrado."
           fi
@@ -41,7 +39,7 @@ jobs:
           if [[ -n "$changes" ]]; then
             git add .
             git commit -m "Update Dockerfile"
-            git push origin $branch
+            git push origin "branch-${{ github.ref_name }}"
           else
             echo "No changes to commit."
           fi
