@@ -26,7 +26,7 @@ jobs:
 
           cd image_base
           git checkout -b 'branch-${{ github.ref_name }}'
-          
+
           if git ls-remote --exit-code origin "branch-${{ github.ref_name }}"; then
             git pull origin "branch-${{ github.ref_name }}"
           else
@@ -42,7 +42,7 @@ jobs:
       
       - name: Open Pull Request
         run: |
-          ls
+          git pull origin "branch-${{ github.ref_name }}"
           cd image_base
 
           pr_count=$(gh pr list --state open --base main --head 'branch-${{ github.ref_name }}' --limit 1 | wc -l)
