@@ -27,8 +27,9 @@ jobs:
           cd image_base
           git checkout -b 'branch-${{ github.ref_name }}'
           
-          sed -i "s|\"image_base.git\"|$(echo '\" R -q -e \'remotes::install_github(\"PedroPGuimaraes/image_base.git@${{ github.ref_name }}\", auth_token = \"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\", dependencies = c(\"Imports\"), force = TRUE, upgrade = FALSE)\'  \"')|g" Dockerfile
-
+          echo 'remotes::install_github("PedroPGuimaraes/image_base.git@${{ github.ref_name }}", auth_token = "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", dependencies = c("Imports"), force = TRUE, upgrade = FALSE)'
+          
+          sed -i 's/"image_base.git"/c\" R -q -e 'remotes::install_github("PedroPGuimaraes/image_base.git@${{ github.ref_name }}", auth_token = "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", dependencies = c("Imports"), force = TRUE, upgrade = FALSE)'  \"/g' Dockerfile
 
           git add .
           git commit -m "Update Dockerfile"
