@@ -33,7 +33,7 @@ jobs:
             echo "Branch remoto não encontrado."
           fi
 
-          sed -i 's/\(image_base\.git@\)[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
+          sed -i 's/\(image_base\.git@\)v[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
 
           changes=$(git status --porcelain)
           if [[ -n "$changes" ]]; then
