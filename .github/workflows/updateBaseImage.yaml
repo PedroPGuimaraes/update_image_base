@@ -6,7 +6,7 @@ on:
       - "*"
 
 jobs:
-  modify-file:
+  base-image:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -20,14 +20,17 @@ jobs:
       
       - name: Check for changes
         run: |
-          git clone https://github.com/PedroPGuimaraes/image_base.git
+          repository="https://github.com/PedroPGuimaraes/image_base.git"
+          branch-name="branch-${{ github.ref_name }}"
+
+          git clone $repository
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
 
           cd image_base
-          git checkout -b "branch-${{ github.ref_name }}"
+          git checkout -b $branch-name
 
-          if git ls-remote --exit-code origin "branch-${{ github.ref_name }}"; then
+          if git ls-remote --exit-code origin $branch-name; then
             git pull origin 'branch-${{ github.ref_name }}'
           else
             echo "Branch remoto não encontrado."
@@ -39,7 +42,7 @@ jobs:
           if [[ -n "$changes" ]]; then
             git add .
             git commit -m "Update Dockerfile"
-            git push origin "branch-${{ github.ref_name }}"
+            git push origin $branch-name
           else
             echo "No changes to commit."
           fi
