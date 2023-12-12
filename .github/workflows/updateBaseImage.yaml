@@ -29,7 +29,7 @@ jobs:
 
 
           cat Dockerfile
-          sed -i '/"image_base.git"/c R -q -e '\''remotes::install_github("PedroPGuimaraes\/image_base.git@${{ github.ref_name }}", auth_token="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", dependencies = c("Imports"), force = TRUE, upgrade = FALSE)'\'' ' Dockerfile
+          sed -i 's/\(image_base\.git@v\)[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
           cat Dockerfile
 
           git add .
