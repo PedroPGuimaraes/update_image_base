@@ -22,7 +22,6 @@ jobs:
         run: |
           repository="https://github.com/PedroPGuimaraes/image_base.git"
           branch_name="branch-${{ github.ref_name }}"
-          repository_name="image_base"
 
           git clone $repository
           git config --global user.email "p.guimaraes@4intelligence.ai"
@@ -37,7 +36,7 @@ jobs:
             echo "Branch remoto não encontrado."
           fi
 
-          sed -i 's/\($repository_name\.git@\)v[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
+          sed -i 's/\(image_base\.git@\)v[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
 
           changes=$(git status --porcelain)
           if [[ -n "$changes" ]]; then
