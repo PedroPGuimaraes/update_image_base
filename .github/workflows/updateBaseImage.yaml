@@ -26,6 +26,7 @@ jobs:
 
           cd image_base
           git checkout -b 'branch-${{ github.ref_name }}'
+          git pull origin 'branch-${{ github.ref_name }}'
 
 
           cat Dockerfile
