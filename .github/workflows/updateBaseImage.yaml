@@ -25,13 +25,10 @@ jobs:
           git config --global user.name "PedroPGuimaraes"
 
           cd image_base
-          git checkout -b 'branch-${{ github.ref_name }}'
-          git pull origin 'branch-${{ github.ref_name }}'
+          git checkout -b 'branch-${{ github.ref_name }}' || exit 1
+          git pull origin 'branch-${{ github.ref_name }}' || exit 1
 
-
-          cat Dockerfile
           sed -i 's/\(image_base\.git@v\)[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
-          cat Dockerfile
 
           git add .
           git commit -m "Update Dockerfile"
