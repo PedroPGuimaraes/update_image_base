@@ -6,7 +6,7 @@ on:
       - "*"
 
 jobs:
-  update-base-image:
+  Changes:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -20,14 +20,14 @@ jobs:
       
       - name: Check for changes
         run: |
-          repository="https://github.com/PedroPGuimaraes/image_base.git"
-          branch_name="branch-${{ github.ref_name }}"
+          repository="https://github.com/4intelligence/4i-base-image.git"
+          branch_name="updateImageBase-${{ github.ref_name }}"
 
           git clone $repository
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
 
-          cd image_base
+          cd 4i-base-image
           git checkout -b $branch_name
 
           if git ls-remote --exit-code origin $branch_name; then
@@ -36,27 +36,34 @@ jobs:
             echo "Branch remoto não encontrado."
           fi
 
-          sed -i 's/\(image_base\.git@\)v[^"]*"/\1${{ github.ref_name }}"/' Dockerfile
+          cd minimal
+          sed -i "s/\(updateImageBase@\)v[^'\"]*/\1${{ github.ref_name }}/" Dockerfile
+
+          cd ..
+          cd r-base
+          sed -i "s/\(updateImageBase@\)v[^'\"]*/\1${{ github.ref_name }}/" Dockerfile
+          cd ..
 
           changes=$(git status --porcelain)
           if [[ -n "$changes" ]]; then
             git add .
-            git commit -m "Update Dockerfile"
+            git commit -m "Update Dockerfiles"
             git push origin $branch_name
           else
             echo "No changes to commit."
           fi
-          
-      
-      - name: Open Pull Request
-        run: |
-          pr_count=$(gh pr list --state open --base main --head 'branch-${{ github.ref_name }}' --limit 1 | wc -l)
-          
-          if [[ "$pr_count" -gt 0 ]]; then
-            echo "There is already an open pull request. Exiting..."
-            exit 0
-          else
-            cd image_base
-            gh pr create --base main --head 'branch-${{ github.ref_name }}' --title "Update Dockerfile" --body "Changes in Dockerfile"
-          fi
-      
+
+  OpenPR:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout private tools
+          uses: actions/checkout@v3
+        - name: Create PR
+          run: |
+            release=$(curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/${{ github.repository }}/pulls \
+              -d '{"title":"Automaticly created PR","body":"Update branch release","head":"main","base":$branch_name}' | jq '.number')
+            echo "Created PR #${release}"
