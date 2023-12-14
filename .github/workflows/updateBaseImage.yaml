@@ -20,7 +20,7 @@ jobs:
       
       - name: Check for changes
         run: |
-          repository="https://github.com/4intelligence/4i-base-image.git"
+          repository="https://github.com/PedroPGuimaraes/image_base.git"
           branch_name="updateImageBase-${{ github.ref_name }}"
 
           git clone $repository
