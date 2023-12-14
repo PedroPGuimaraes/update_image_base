@@ -66,5 +66,5 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${{ github.repository }}/pulls \
-              -d '{"title":"Automaticly created PR","body":"Update branch release","head":"main","base":$branch_name}' | jq '.number')
+              -d '{"title":"Automaticly created PR","body":"Update branch release","head":"main","base":"updateImageBase-${{ github.ref_name }}"}' | jq '.number')
             echo "Created PR #${release}"
