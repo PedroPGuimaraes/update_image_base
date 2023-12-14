@@ -53,14 +53,8 @@ jobs:
       steps:
         - name: Checkout private tools
           uses: actions/checkout@v3
-        - name: Clone repository
-          run: |
-            repository="https://github.com/PedroPGuimaraes/image_base.git"
-            git clone  $repository
         - name: Create PR
           run: |
-            ls
-            cd image_base
             release=$(curl \
               -X POST \
               -H "Accept: application/vnd.github+json" \
