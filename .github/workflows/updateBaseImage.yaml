@@ -27,7 +27,7 @@ jobs:
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
 
-          cd 4i-base-image
+          cd image-base
           git checkout -b $branch_name
 
           if git ls-remote --exit-code origin $branch_name; then
@@ -36,13 +36,7 @@ jobs:
             echo "Branch remoto não encontrado."
           fi
 
-          cd minimal
           sed -i "s/\(updateImageBase@\)v[^'\"]*/\1${{ github.ref_name }}/" Dockerfile
-
-          cd ..
-          cd r-base
-          sed -i "s/\(updateImageBase@\)v[^'\"]*/\1${{ github.ref_name }}/" Dockerfile
-          cd ..
 
           changes=$(git status --porcelain)
           if [[ -n "$changes" ]]; then
