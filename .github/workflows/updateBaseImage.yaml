@@ -27,7 +27,7 @@ jobs:
           git config --global user.email "p.guimaraes@4intelligence.ai"
           git config --global user.name "PedroPGuimaraes"
 
-          cd image-base
+          cd image_base
           git checkout -b $branch_name
 
           if git ls-remote --exit-code origin $branch_name; then
