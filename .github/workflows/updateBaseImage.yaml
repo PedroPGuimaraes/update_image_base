@@ -54,6 +54,7 @@ jobs:
           fi
 
   OpenPR:
+      needs: Changes
       runs-on: ubuntu-latest
       steps:
         - name: Checkout private tools
